@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .user-info {
+            width: 80%;
+            margin: auto;
+            border-collapse: collapse;
+        }
+        .user-info th, .user-info td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        .user-info th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+        .image-cell img {
+            width: 100px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <button onclick="fetchData()">Get the data</button>
+
+    <script>
+        async function fetchData() {
+            try {
+                const response = await fetch("https://fakerapi.it/api/v1/persons?_locale=en_EN&_quantity=1");
+                const jsondata = await response.json();
+                const person = jsondata.data[0];
+                
+                // Create the table
+                const table = document.createElement('table');
+                table.className = 'user-info';
+                
+                // Table header
+                const thead = table.createTHead();
+                const headerRow = thead.insertRow();
+                const headers = ['Field', 'Details'];
+                headers.forEach(headerText => {
+                    const th = document.createElement('th');
+                    th.textContent = headerText;
+                    headerRow.appendChild(th);
+                });
+
+                // Table body
+                const tbody = table.createTBody();
+                const rows = [
+                    ['First Name', person.firstname],
+                    ['Last Name', person.lastname],
+                    ['Email', person.email],
+                    ['Phone', person.phone],
+                    ['Birthday', person.birthday],
+                    ['Gender', person.gender],
+                    ['Street', person.address.street],
+                    ['Street Name', person.address.streetName],
+                    ['Building Number', person.address.buildingNumber],
+                    ['City', person.address.city],
+                    ['Zipcode', person.address.zipcode],
+                    ['Country', person.address.country],
+                    ['County Code', person.address.county_code],
+                    ['Latitude', person.address.latitude],
+                    ['Longitude', person.address.longitude],
+                    ['Website', `<a href="${person.website}" target="_blank">${person.website}</a>`],
+                    ['Image', `<img src="${person.image}" alt="${person.firstname} ${person.lastname}">`]
+                ];
+
+                rows.forEach(rowData => {
+                    const row = tbody.insertRow();
+                    rowData.forEach(cellData => {
+                        const cell = row.insertCell();
+                        cell.innerHTML = cellData;
+                    });
+                });
+
+                // Clear any existing content and append the table
+                const container = document.getElementById('container');
+                container.innerHTML = '';
+                container.appendChild(table);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+    </script>
+</body>
+</html>

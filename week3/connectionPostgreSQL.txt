@@ -1,0 +1,1 @@
+postgresql://mydb_owner:jMNI8gDdRn4X@ep-flat-mouse-a5y5u4oc.us-east-2.aws.neon.tech/mydb?sslmode=require

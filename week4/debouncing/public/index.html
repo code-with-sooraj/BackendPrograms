@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sum Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        .main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container1, .container2 {
+            display: none;
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <button class="btn1" onclick="sumVisible()">Sum</button>
+    <button class="btn2" onclick="interestVisible()">Interest</button>
+    <div class="main">
+        <div class="container1">
+            <h1>Sum Calculator</h1>
+            <input oninput="debouncePopulate1()" type="text" id="a" placeholder="Enter first number"><br><br>
+            <input oninput="debouncePopulate1()" type="text" id="b" placeholder="Enter second number"><br><br>
+            <button onclick="sum()">Calculate Sum</button>
+            <div id="container1"></div>
+        </div>
+        <div class="container2">
+            <h1>Interest Calculator</h1>
+            <input oninput="populate2()" type="text" id="amt" placeholder="Enter amount"><br><br>
+            <input oninput="populate2()" type="text" id="r" placeholder="Enter rate"><br><br>
+            <input oninput="populate2()" type="text" id="t" placeholder="Enter time"><br><br>
+            <button onclick="interest()">Calculate interest</button>
+            <div id="container2"></div>
+        </div>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>
